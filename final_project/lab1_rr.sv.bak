@@ -1,0 +1,81 @@
+// Rachel Roley
+// rroley@hmc.edu
+// 9/14/14
+// Module: lab1_rr
+// The top level module contained in this file will take in a number using DISP switches
+// pass that number to the 7 segment display module 
+// and light the LED on the board as specified in Lab 1 instructions, at 
+// http://www3.hmc.edu/~jspjut/class/f2014/e155/lab/lab01.pdf
+
+module lab1_rr(input logic       clk, // the clock
+					input logic[3:0]  s, // the input logic for the switches
+					output logic[7:0] led, // the led on the board
+					output logic[6:0] seg);// the 7seg output
+	
+
+	
+	//create a counter
+logic[24:0] counter;
+
+
+// add one to the counter each clock cycle
+always_ff@(posedge clk)
+	counter <= counter+1;
+// When the counter has a one in the 25th bit, it will have gone through 
+// 10^24 clock cycles- at this rate (40 Mhz/2^24), the frequency will be the desired 
+// ~2.4 Hz. 
+assign led[7] = counter[23];
+
+
+//assign the logic as outlined in the lounge
+always_comb
+	begin 
+	led[0] = s[0];
+	led[1] = ~s[0];
+	led[2] = s[1];
+	led[3] = ~s[1];
+	led[4] = s[2];
+	led[5] = ~s[2];
+	led[6] = s[2] & s[3];
+	end	
+	
+	// call the 7-segment display module to set the last 7 bits of seg
+SevenSeg mod1(s, seg[6:0]);
+
+endmodule
+
+
+// Rachel Roley
+// rroley@hmc.edu
+// 9/14/14
+// Module: SevenSeg
+// This module takes in switch values and sets the 7seg display accordingly 
+// Here, 1 will turn a segment off, and 0 will turn a segment on
+
+module SevenSeg(input logic[3:0] data, //switch values
+					 output logic[6:0] ledseg); // output segment values 
+
+//using case statements to set values based on the data
+always_comb
+case(data)
+		//Data in the format abc_defg
+		0: ledseg = 7'b000_0001;
+		1: ledseg = 7'b100_1111;
+		2: ledseg = 7'b001_0010;
+		3: ledseg = 7'b000_0110;
+		4: ledseg = 7'b100_1100;
+		5: ledseg = 7'b010_0100;
+		6: ledseg = 7'b010_0000;
+		7: ledseg = 7'b000_1111;
+		8: ledseg = 7'b000_0000;
+		9: ledseg = 7'b000_1100;
+		10: ledseg = 7'b000_1000;
+		11: ledseg = 7'b110_0000;
+		12: ledseg =7'b111_0010;
+		13: ledseg = 7'b100_0010;
+		14: ledseg = 7'b011_0000;
+		15: ledseg = 7'b011_1000;
+		default: ledseg = 7'b111_1111;
+endcase
+
+endmodule

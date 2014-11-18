@@ -1,0 +1,16 @@
+|final_project
+clk => ~NO_FANOUT~
+s[0] => led[0].DATAIN
+s[1] => led[1].DATAIN
+s[2] => led[2].DATAIN
+s[3] => ~NO_FANOUT~
+led[0] <= s[0].DB_MAX_OUTPUT_PORT_TYPE
+led[1] <= s[1].DB_MAX_OUTPUT_PORT_TYPE
+led[2] <= s[2].DB_MAX_OUTPUT_PORT_TYPE
+led[3] <= <GND>
+led[4] <= <GND>
+led[5] <= <GND>
+led[6] <= <GND>
+led[7] <= <GND>
+
+
