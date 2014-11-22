@@ -11,8 +11,10 @@
 
 
 void initadc(int channel) {
-AD1CHSbits.CH0SA = channel; // select which channel
-AD1PCFGCLR = 1 << channel; // configure input pin
+//AD1CHSbits.CH0SA = channel; // select which channel
+//AD1PCFGCLR = 1 << channel; // configure input pin
+AD1CHS = 0x00070000;
+AD1PCFG = 0xFF7F;
 AD1CON1bits.ON = 1; 	 	// turn ADC on
 AD1CON1bits.SAMP = 1; 	 	// begin sampling
 AD1CON1bits.DONE = 0; 	 	// clear DONE flag
@@ -31,8 +33,10 @@ int main(void) {
 
     int sample;
     initadc(11);
+     while(1){
     sample = readadc();
     TRISD = 0xFF00;
-    PORTD = sample; 
+    PORTD = sample;
+    }
 }
 
