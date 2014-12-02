@@ -315,9 +315,10 @@ void setstrip(void){
 
 //short numLEDs;
 //short numBytes;
-long numBytes = 96; //
+//long numBytes = 96; //
 long numLEDs = 32; //the number of LEDs in the strip
-long pixels[32]; // the array with the color value for each led
+int pixels[32]; // the array with the color value for each led
+
 
 /*
 // sets up the ADC
@@ -380,7 +381,7 @@ void colorWipe(long c) {
 // set clock low
 // wait other half of time
 void bitbang(int num) {
-    TRISD = 0x0000;
+    
     num = (0x0002 | num);
     PORTD = num;
     delaymicros(1);
@@ -419,7 +420,7 @@ else if (micros > 6){
 void show(void) {
     //char *ptr = pixels;
     short i = 0;
-    short n = 32;
+    short n = 24;
     int output;
     while(i<numLEDs){
         while(n>0){
@@ -449,29 +450,45 @@ void setstrip(void){
 void main(void) {
    //zeros();
    //long red = Color(0,127,0);
-   int color = 0xFFF0F0;
+   int color = 0x80FF80;
    //colorWipe(color);
-    //short i = 0;
-    short n = 24;
-    int output;
-    int i = 0;
-    while(i<numLEDs-1){
-        while(n>0){
+   int q;
+   int n;
+   int output;
+   TRISD = 0xFF00;
+  //zeros();
+  // int f=0;
+   // while(f<768)
+    //{
+      //  bitbang(1);
+        //f++;
+    //}
+
+   // zeros();
+    
+  //  delaymicros(1000);
+
+    zeros();
+    
+  for(q = 0; q<numLEDs; q++){
+         for(n=24; n>0;n--){
             output = color;
             output = output >> (n-1);
+            output = output & 0x0001;
             bitbang(output);
-            n--;
-        }
-        i++;
-    }
-     zeros();
-    }
+         }
+                    //PORTD= output;
+           
+                    //delaymicros(10000);
 
-    /*while(n<1560)
-    {
-        bitbang(11);
-        n++;
     }
+ zeros();
+}
+    
+ 
+    
+
+    /*
     zeros();
      */
 
