@@ -1,0 +1,16 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Sound Effects}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Audio Circuit}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Audio Signal}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Audio PIC Code}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{LED Strip}{}% 6
+\BOOKMARK [2][-]{subsection.3.1}{Potentiometer Control}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{LED Strip Characteristics}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.3}{SPI Communication}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.4}{Setting Colors}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Bill of Materials}{}% 11
+\BOOKMARK [1][-]{appendix.A}{Appendix}{}% 12
+\BOOKMARK [2][-]{subsection.A.1}{LED Code}{appendix.A}% 13
+\BOOKMARK [2][-]{subsection.A.2}{Audio Code}{appendix.A}% 14
+\BOOKMARK [3][-]{subsubsection.A.2.1}{soundEffects.c}{subsection.A.2}% 15
+\BOOKMARK [3][-]{subsubsection.A.2.2}{backgroundHum.h}{subsection.A.2}% 16
