@@ -171,21 +171,42 @@ int Wheel(int WheelPos)
   {
     case 0:
       r = 127 - WheelPos % 128;   //Red down
-      g = WheelPos % 128;      // Green up
-      b = 0;                  //blue off
+      b = WheelPos % 128;      // Blue up
+      g = 0;                  //green off
       break;
     case 1:
       r = 0;                  //red off
-      g = 127 - WheelPos % 128;  //green down
-      b = WheelPos % 128;      //blue up
+      b = 127 - WheelPos % 128;  //blue down
+      g = WheelPos % 128;      //green up
       break;
     case 2:
       r = WheelPos % 128;      //red up
-      b = 127 - WheelPos % 128;  //blue down
-      g = 0;                  //green off
+      b = 0;                  //blue off
+      g = 127 - WheelPos % 128;  //green down
       break;
   }
   return(Color(r,g,b));
+}
+
+void theaterChase(int c, int wait) {
+    int j;
+    int q;
+    int i;
+  for (j=0; j<10; j++) {  //do 10 cycles of chasing
+    for (q=0; q < 3; q++) {
+      for (i=0; i < 32; i=i+3) {
+        setPixelColor(i+q, c);    //turn every third pixel on
+      }
+      
+
+      delaymicros(wait);
+
+      //for (i=0; i < 32; i=i+3) {
+      //  setPixelColor(i+q, 0);        //turn every third pixel off
+      //}
+      //setstrip();
+    }
+  }
 }
 
 
@@ -196,12 +217,13 @@ void main(void) {
     initadc();
     while(1){
     int pos = readadc();
- 
+
     //pos = pos&0x03FF;
     int c= Wheel(pos);
-    colorWipe(c);
- 
-   setstrip();
+    //colorWipe(c);
+    theaterChase(c,1000);
+    setstrip();
+   //setstrip();
     }
 }
     
